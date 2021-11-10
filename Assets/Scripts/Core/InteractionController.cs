@@ -9,22 +9,19 @@ public class InteractionController : MonoBehaviour
     public Transform checkFrom;
     public InteractionPanel interactionPanel;
 
-    private bool _canInteract = false;
-
-    public KeyCode interactionKey;
+    private CoreInteraction _interaction;
 
     public void CheckForInteractableObjects()
     {
         bool inRange = Physics.Raycast(checkFrom.position, checkFrom.forward, out var hit, interactionDistance, mask);
         if (inRange)
         {
-            if (!_canInteract)
+            if (!_interaction)
             {
                 CoreInteraction interaction = hit.collider.gameObject.GetComponent<CoreInteraction>();
-                if (interaction != null && interaction.CanInteract())
+                if (interaction != null && !interaction.disabled)
                 {
-                    Debug.LogFormat("Interaction in range: {0}", interaction.friendlyName);
-                    _canInteract = true;
+                    _interaction = interaction;
 
                     SetupInteractionPrompt(interaction);
                 }
@@ -32,7 +29,6 @@ public class InteractionController : MonoBehaviour
         }
         else
         {
-            _canInteract = false;
             ClearInteraction();
         }
     }
@@ -41,7 +37,7 @@ public class InteractionController : MonoBehaviour
     {
         if (interactionPanel)
         {
-            interactionPanel.Setup(interactionKey.ToString(), interaction.GetInteractionString());
+            interactionPanel.Setup(KeyCode.E.ToString(), interaction.GetInteractionString());
         }
     }
 
@@ -49,7 +45,26 @@ public class InteractionController : MonoBehaviour
     {
         if (interactionPanel)
         {
+            _interaction = null;
+
             interactionPanel.Hide();
         }
+    }
+
+    void HandleInteraction()
+    {
+        if (_interaction)
+        {
+            _interaction.Interact();
+
+            ClearInteraction();
+        }
+    }
+
+    public void OnInteraction()
+    {
+        Debug.Log("User pressed interact key");
+
+        HandleInteraction();
     }
 }

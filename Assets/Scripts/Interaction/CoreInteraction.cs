@@ -14,21 +14,28 @@ public class CoreInteraction : MonoBehaviour
 {
     public string id;
     public string friendlyName;
+    public bool disableOnInteract;
 
     public InteractionType interactionType;
     public string interactString;
 
+    [HideInInspector] public bool interactable;
+    [HideInInspector] public bool disabled;
+
     public virtual void Interact()
     {
-   
+        if (disableOnInteract)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public virtual bool CanInteract()
     {
-        return true;
+        return interactable;
     }
 
-    public string GetInteractionString()
+    public virtual string GetInteractionString()
     {
         return string.Format("{0} {1}", interactString, friendlyName);
     }

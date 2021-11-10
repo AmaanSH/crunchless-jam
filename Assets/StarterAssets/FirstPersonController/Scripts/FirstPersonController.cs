@@ -70,7 +70,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
-		private InteractionController _interactionController;
+		[SerializeField] private InteractionController _interactionController;
 
 		private const float _threshold = 0.01f;
 
@@ -87,7 +87,6 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-			_interactionController = GetComponent<InteractionController>();
 
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;

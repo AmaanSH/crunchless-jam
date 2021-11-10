@@ -4,41 +4,62 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private List<Item> items = new List<Item>(); // the current items a player has
+    public static InventoryManager instance;
 
-    public Item GetItem(string id)
+    private List<Item> items = new List<Item>();
+
+    private void Awake()
     {
-        return items.Find(x => x.id == id);
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
-    public void PickupItem(Item item)
+    public static Item GetItem(string id)
     {
-        int currentPickedUp = items.FindAll(x => x.id == item.id).Count;
-        if (currentPickedUp > 0)
+        if (instance)
         {
-            if (item.pickupMultiple)
+            return instance.items.Find(x => x.id == id);
+        }
+
+        return null;
+    }
+
+    public static void PickupItem(Item item)
+    {
+        if (instance)
+        {
+            int currentPickedUp = instance.items.FindAll(x => x.id == item.id).Count;
+            if (currentPickedUp > 0)
+            {
+                if (item.pickupMultiple)
+                {
+                    Debug.LogFormat("User picked up {0}", item.friendlyName);
+                    instance.items.Add(item);
+                }
+            }
+            else
             {
                 Debug.LogFormat("User picked up {0}", item.friendlyName);
-                items.Add(item);
+                instance.items.Add(item);
             }
-        }
-        else
-        {
-            Debug.LogFormat("User picked up {0}", item.friendlyName);
-            items.Add(item);
         }
     }
 
-    public void RemoveItem(string id)
+    public static void RemoveItem(string id)
     {
-        if (items.Count > 0)
+        if (instance)
         {
-            Item item = items.Find(x => x.id == id);
-            if (item != null)
+            if (instance.items.Count > 0)
             {
-                Debug.LogFormat("Removing {0} from user", item.friendlyName);
+                Item item = instance.items.Find(x => x.id == id);
+                if (item != null)
+                {
+                    Debug.LogFormat("Removing {0} from user", item.friendlyName);
 
-                items.Remove(item);
+                    instance.items.Remove(item);
+                }
             }
         }
     }
