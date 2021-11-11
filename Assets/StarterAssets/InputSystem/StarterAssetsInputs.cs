@@ -30,7 +30,7 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(UIController.instance.cursorInputForLook)
+			if(cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
 			}

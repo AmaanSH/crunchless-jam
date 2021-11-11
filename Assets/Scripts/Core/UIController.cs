@@ -69,23 +69,30 @@ public class UIController : MonoBehaviour
     {
         if (instance)
         {
-            UI uiObj = instance.GetUIByType(type);
-            if (uiObj != null)
+            if (!instance.ViewingUI(type))
             {
-                uiObj.ui.Setup(data);
-
-                if (uiObj.displayType == DisplayType.Fullscreen)
+                UI uiObj = instance.GetUIByType(type);
+                if (uiObj != null)
                 {
-                    instance.cursorLocked = false;
-                    instance.SetCursorState(false);
-                }
-                else
-                {
-                    instance.cursorLocked = true;
-                    instance.SetCursorState(true);
-                }
+                    uiObj.ui.Setup(data);
 
-                instance.stack.Add(uiObj);
+                    if (uiObj.displayType == DisplayType.Fullscreen)
+                    {
+                        instance.cursorLocked = false;
+                        instance.SetCursorState(false);
+                    }
+                    else
+                    {
+                        instance.cursorLocked = true;
+                        instance.SetCursorState(true);
+                    }
+
+                    instance.stack.Add(uiObj);
+                }
+            }
+            else
+            {
+                Debug.Log("Already viewing");
             }
         }
     }
@@ -141,6 +148,18 @@ public class UIController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool ViewingUI(UIType type)
+    {
+        if (stack.Count > 0)
+        {
+            UI activeUI = stack.Find(x => x.type == type);
+
+            return (activeUI != null) ? true : false;
+        }
+
+        return false;
     }
 
     private void SetCursorState(bool newState)
