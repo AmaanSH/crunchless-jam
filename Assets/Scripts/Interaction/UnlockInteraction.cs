@@ -37,7 +37,7 @@ public class UnlockInteraction : CoreInteraction
     {
         if (!CanInteract())
         {
-            return string.Format("<color=\"red\">Need {0}</color>", requiredItem);
+            return string.Format("<color=\"red\">Need {0} to {1}</color>", requiredItem, interactString.ToLower());
         }
         else
         {

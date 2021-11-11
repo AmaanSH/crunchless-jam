@@ -7,7 +7,6 @@ public class InteractionController : MonoBehaviour
     public LayerMask mask;
     public float interactionDistance;
     public Transform checkFrom;
-    public InteractionPanel interactionPanel;
 
     private CoreInteraction _interaction;
 
@@ -35,20 +34,13 @@ public class InteractionController : MonoBehaviour
 
     void SetupInteractionPrompt(CoreInteraction interaction)
     {
-        if (interactionPanel)
-        {
-            interactionPanel.Setup(KeyCode.E.ToString(), interaction.GetInteractionString());
-        }
+        UIController.SetupUI(UIType.Interaction, KeyCode.E.ToString(), interaction.GetInteractionString());
     }
 
     void ClearInteraction()
     {
-        if (interactionPanel)
-        {
-            _interaction = null;
-
-            interactionPanel.Hide();
-        }
+        UIController.HideUI(UIType.Interaction);
+        _interaction = null;
     }
 
     void HandleInteraction()

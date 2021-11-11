@@ -95,14 +95,20 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
+			if (!UIController.BlockMovement())
+            {
+				JumpAndGravity();
+				GroundedCheck();
+				Move();
+			}
 		}
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if (!UIController.BlockMovement())
+            {
+				CameraRotation();
+			}
 		}
 
 		private void GroundedCheck()

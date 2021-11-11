@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InteractionPanel : MonoBehaviour
+public class InteractionPanel : CoreUI
 {
     public TextMeshProUGUI keyText;
     public TextMeshProUGUI interactText;
 
-    private void Start()
+    public override void Setup(params string[] data)
     {
-        gameObject.SetActive(false);
-    }
+        string key = data[0];
+        string interact = data[1];
 
-    public void Setup(string key, string interact)
-    {
         keyText.text = string.Format("[{0}]", key);
         interactText.text = interact;
 
         gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
     }
 }
