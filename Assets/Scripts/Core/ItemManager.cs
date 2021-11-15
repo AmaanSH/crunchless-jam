@@ -13,5 +13,14 @@ public class ItemManager : MonoBehaviour
         Debug.LogFormat("Found items {0}", items.Length);
 
         gameItems.AddRange(items);
+
+        for (int i = 0; i < gameItems.Count; i++)
+        {
+            CoreInteraction interaction = gameItems[i].GetComponent<CoreInteraction>();
+            if (interaction != null)
+            {
+                interaction.Init();
+            }
+        }
     }
 }
