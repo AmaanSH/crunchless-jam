@@ -15,15 +15,19 @@ public class InteractionController : MonoBehaviour
         bool inRange = Physics.Raycast(checkFrom.position, checkFrom.forward, out var hit, interactionDistance, mask);
         if (inRange)
         {
-            if (!_interaction)
+            CoreInteraction interaction = hit.collider.transform.root.GetComponent<CoreInteraction>();
+            if (interaction == null)
             {
-                CoreInteraction interaction = hit.collider.gameObject.GetComponent<CoreInteraction>();
-                if (interaction != null && !interaction.disabled)
-                {
-                    _interaction = interaction;
+                interaction = (hit.collider.transform.parent.GetComponent<CoreInteraction>() != null) ? hit.collider.transform.parent.GetComponent<CoreInteraction>() : hit.collider.transform.GetComponent<CoreInteraction>();
+            }
 
-                    SetupInteractionPrompt(interaction);
-                }
+            if (interaction != null && !interaction.disabled)
+            {
+                ClearInteraction();
+
+                _interaction = interaction;
+
+                SetupInteractionPrompt(interaction);
             }
         }
         else
@@ -35,12 +39,20 @@ public class InteractionController : MonoBehaviour
     void SetupInteractionPrompt(CoreInteraction interaction)
     {
         UIController.SetupUI(UIType.Interaction, KeyCode.E.ToString(), interaction.GetInteractionString());
+
+        interaction.Highlight(true);
     }
 
     void ClearInteraction()
     {
-        UIController.HideUI(UIType.Interaction);
-        _interaction = null;
+        if (_interaction != null)
+        {
+            UIController.HideUI(UIType.Interaction);
+
+            _interaction.Highlight(false);
+
+            _interaction = null;
+        }
     }
 
     void HandleInteraction()
