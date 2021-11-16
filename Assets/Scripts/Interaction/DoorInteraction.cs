@@ -40,12 +40,13 @@ public class DoorInteraction : CoreInteraction
                         Animate();
                     }
                 }
-
                 break;
             default:
                 Animate();
                 break;
         }
+
+        base.Interact();
     }
 
     public override void OnEvent(params object[] data)

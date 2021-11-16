@@ -22,8 +22,16 @@ public class CoreInteraction : MonoBehaviour
     public string registerEvent;
     public string triggerEvent;
 
-    [HideInInspector] public bool interactable;
-    [HideInInspector] public bool disabled;
+    public CoreInteraction parent;
+
+    [HideInInspector]
+    public bool interactable;
+    
+    [HideInInspector]
+    public bool disabled;
+
+    [HideInInspector]
+    public List<CoreInteraction> childrenInteractions = new List<CoreInteraction>();
 
     private Outline _outline;
 
@@ -36,9 +44,16 @@ public class CoreInteraction : MonoBehaviour
         }
 
         _outline = GetComponent<Outline>();
+
         if (_outline != null)
         {
             _outline.enabled = false;
+        }
+
+        if (parent != null)
+        {
+            disabled = true;
+            parent.childrenInteractions.Add(this);
         }
     }
 
@@ -61,6 +76,14 @@ public class CoreInteraction : MonoBehaviour
         {
             EventManager.Unsubscribe(registerEvent, OnEvent);
         }
+
+        if (childrenInteractions.Count > 0)
+        {
+            childrenInteractions.ForEach(action =>
+            {
+                action.disabled = !action.disabled;
+            });
+        }
     }
 
     public void Highlight(bool enabled)
@@ -81,12 +104,20 @@ public class CoreInteraction : MonoBehaviour
 
     public virtual bool CanInteract()
     {
-        return interactable;
+        return !disabled;
     }
 
     public virtual string GetInteractionString()
     {
         return string.Format("{0} {1}", interactString, friendlyName);
+    }
+
+    public void SetOutlineColor(Color color)
+    {
+        if (_outline)
+        {
+            _outline.OutlineColor = color;
+        }
     }
 
     public virtual void OnEvent(params object[] data)

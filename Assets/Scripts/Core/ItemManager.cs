@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private List<GameObject> gameItems = new List<GameObject>();
+    private List<CoreInteraction> gameItems = new List<CoreInteraction>();
 
     // Start is called before the first frame update
     void Start()
@@ -12,13 +12,13 @@ public class ItemManager : MonoBehaviour
         GameObject[] items = GameObject.FindGameObjectsWithTag("Item");
         Debug.LogFormat("Found items {0}", items.Length);
 
-        gameItems.AddRange(items);
-
-        for (int i = 0; i < gameItems.Count; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            CoreInteraction interaction = gameItems[i].GetComponent<CoreInteraction>();
+            CoreInteraction interaction = items[i].GetComponent<CoreInteraction>();
             if (interaction != null)
             {
+                gameItems.Add(interaction);
+
                 interaction.Init();
             }
         }

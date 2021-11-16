@@ -40,6 +40,15 @@ public class InteractionController : MonoBehaviour
     {
         UIController.SetupUI(UIType.Interaction, KeyCode.E.ToString(), interaction.GetInteractionString());
 
+        if (!interaction.CanInteract())
+        {
+            interaction.SetOutlineColor(Color.red);
+        }
+        else
+        {
+            interaction.SetOutlineColor(Color.white);
+        }
+
         interaction.Highlight(true);
     }
 
@@ -57,7 +66,7 @@ public class InteractionController : MonoBehaviour
 
     void HandleInteraction()
     {
-        if (_interaction)
+        if (_interaction && _interaction.CanInteract())
         {
             _interaction.Interact();
 

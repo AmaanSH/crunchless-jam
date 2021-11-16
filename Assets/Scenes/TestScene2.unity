@@ -509,6 +509,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2429500245968518216, guid: aea71a15bc9a99c4487994542c9ff9df, type: 3}
   m_PrefabInstance: {fileID: 1729617656}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &863840166 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 554890635956312251, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+  m_PrefabInstance: {fileID: 1394104808}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f530dd289807845a79a5b449000714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &868015069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,10 +1338,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnEvents:
   - eventName: spawn_ghost_hall
+    holdItem: 
     spawn: {fileID: 1169343193}
     target: {fileID: 1933576720}
     spawnGhostWhenNotLooking: 1
     moveGhostWhenNotLooking: 1
+    hideGhostOnEvent: 0
 --- !u!195 &1296029000
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1657,6 +1670,14 @@ PrefabInstance:
       propertyPath: id
       value: drawer_5
       objectReference: {fileID: 0}
+    - target: {fileID: 554890635956312251, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: requiredItem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 554890635956312251, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: triggerEvent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 641781778484182675, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: id
       value: drawer_2
@@ -1749,6 +1770,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2570852510164261724, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2571967815019816089, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: id
       value: drawer_3
@@ -1789,6 +1814,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3417362872803935667, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3779598414781891062, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -1817,6 +1846,14 @@ PrefabInstance:
       propertyPath: triggerEvent
       value: spawn_ghost_hall
       objectReference: {fileID: 0}
+    - target: {fileID: 4412639751057046157, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: registerEvent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4412639751057046157, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 863840166}
     - target: {fileID: 4622245171843950668, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: id
       value: drawer_3
@@ -1832,6 +1869,10 @@ PrefabInstance:
     - target: {fileID: 4851161203613569876, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851161203613569876, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5593299696352348954, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1885,6 +1926,10 @@ PrefabInstance:
       propertyPath: id
       value: drawer_3
       objectReference: {fileID: 0}
+    - target: {fileID: 6909965453267391038, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 863840166}
     - target: {fileID: 6936380672191157255, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: id
       value: drawer_2
@@ -1980,6 +2025,10 @@ PrefabInstance:
     - target: {fileID: 9162790721091373296, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9162790721091373296, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3244661018188556858, guid: c3d032ab9977fb349bd3922ee133ae42, type: 3}
