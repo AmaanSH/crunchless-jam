@@ -7,11 +7,13 @@ using UnityEngine.AI;
 public class SpawnEvent
 {
     public string eventName;
+    public string holdItem;
     public Transform spawn;
     public Transform target;
 
     public bool spawnGhostWhenNotLooking;
     public bool moveGhostWhenNotLooking;
+    public bool hideGhostOnEvent;
 }
 
 public class GhostController : MonoBehaviour
@@ -63,10 +65,27 @@ public class GhostController : MonoBehaviour
 
         if (spawnEvent != null)
         {
-            StartCoroutine(SpawnGhostRoutine(spawnEvent));
+            if (!string.IsNullOrEmpty(spawnEvent.holdItem))
+            {
+                HoldItem(spawnEvent.holdItem);
+            }
+
+            if (spawnEvent.hideGhostOnEvent)
+            {
+                _animator.SetTrigger("hide");
+            }
+            else
+            {
+                StartCoroutine(SpawnGhostRoutine(spawnEvent));
+            }
 
             EventManager.Unsubscribe(eventName, SpawnGhostEvent);
         }
+    }
+
+    public void HoldItem(string item)
+    {
+        // TODO: setup system to allow the ghost to hold any item in the game
     }
 
     private IEnumerator SpawnGhostRoutine(SpawnEvent spawnEvent)
@@ -112,7 +131,10 @@ public class GhostController : MonoBehaviour
                 yield return null;
             }
 
-            _animator.SetTrigger("hide");
+            if (!spawnEvent.hideGhostOnEvent)
+            {
+                _animator.SetTrigger("hide");
+            }
         }
     }
 
