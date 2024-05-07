@@ -1,6 +1,8 @@
 # Crunchless Jam
 
-This was my first attempt at making a horror game for a gamejam. Sadly this was unfinished due to unforseen circumstances with the team. Our team consisted of me as the programmer, a gamme designer and 3D artist. 
+This was my first attempt at making a horror game for a gamejam. This was also my first first-person, puzzle game I created.
+
+Sadly this was unfinished due to unforseen circumstances with the team. Our team consisted of me as the programmer, a gamme designer and 3D artist. 
 Most of the gameplay was created but is missing audio, menus and the final chase scene.
 
 The game aimed to uncover the truth about the ghost through notes and books scattered around the abandoned school.
