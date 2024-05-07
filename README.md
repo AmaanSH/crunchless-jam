@@ -1,4 +1,5 @@
 # Crunchless Jam
+NOTE - This is one of the first games I worked on so it's not great.
 
 This was my first attempt at making a horror game for a gamejam. This was also the first first-person, puzzle game I created incoporating AI.
 
